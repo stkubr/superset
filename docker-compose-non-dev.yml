@@ -51,6 +51,21 @@ services:
       - 8088:8088
     depends_on: *superset-depends-on
     volumes: *superset-volumes
+    networks:
+      - traefik-public
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.superset-immodex-http.rule=Host(`app.immodex.io`)
+        - traefik.http.routers.superset-immodex-http.entrypoints=http
+        - traefik.http.routers.superset-immodex-http.middlewares=https-redirect
+        - traefik.http.routers.superset-immodex-https.rule=Host(`app.immodex.io`)
+        - traefik.http.routers.superset-immodex-https.entrypoints=https
+        - traefik.http.routers.superset-immodex-https.tls=true
+        - traefik.http.routers.superset-immodex-https.tls.certresolver=le
+        - traefik.http.services.superset-immodex.loadbalancer.server.port=8088
 
   superset-init:
     image: *superset-image
@@ -94,3 +109,7 @@ volumes:
     external: false
   redis:
     external: false
+
+networks:
+  traefik-public:
+    external: true
