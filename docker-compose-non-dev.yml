@@ -59,6 +59,8 @@ services:
     env_file: docker/.env-non-dev
     depends_on: *superset-depends-on
     user: "root"
+    healthcheck:
+      disable: true
     volumes: *superset-volumes
 
   superset-worker:
@@ -69,6 +71,8 @@ services:
     restart: unless-stopped
     depends_on: *superset-depends-on
     user: "root"
+    healthcheck:
+      disable: true
     volumes: *superset-volumes
 
   superset-worker-beat:
@@ -79,6 +83,8 @@ services:
     restart: unless-stopped
     depends_on: *superset-depends-on
     user: "root"
+    healthcheck:
+      disable: true
     volumes: *superset-volumes
 
 volumes:
