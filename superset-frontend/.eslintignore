@@ -28,4 +28,8 @@ src/dashboard/deprecated/*
 src/temp/*
 **/node_modules
 *.d.ts
-temporary_superset_ui/**/*
+coverage/
+esm/
+lib/
+tmp/
+storybook-static/

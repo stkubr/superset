@@ -21,10 +21,7 @@ import React from 'react';
 import { Slice } from 'src/types/Chart';
 import { render, screen } from 'spec/helpers/testing-library';
 import userEvent from '@testing-library/user-event';
-import fetchMock from 'fetch-mock';
 import ExploreHeader from '.';
-
-fetchMock.get('http://localhost/api/v1/chart/318', {});
 
 const createProps = () => ({
   chart: {
@@ -33,7 +30,6 @@ const createProps = () => ({
       datasource: '49__table',
       slice_id: 318,
       url_params: {},
-      time_range_endpoints: ['inclusive', 'exclusive'],
       granularity_sqla: 'time_start',
       time_range: 'No filter',
       all_columns_x: ['age'],
@@ -69,7 +65,6 @@ const createProps = () => ({
       row_limit: 10000,
       slice_id: 318,
       time_range: 'No filter',
-      time_range_endpoints: ['inclusive', 'exclusive'],
       url_params: {},
       viz_type: 'histogram',
       x_axis_label: 'age',
